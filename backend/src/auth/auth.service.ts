@@ -1,7 +1,6 @@
 import {
   BadRequestException,
   ForbiddenException,
-  HttpException,
   Inject,
   Injectable,
   InternalServerErrorException,
@@ -15,11 +14,12 @@ import { BcryptService } from 'src/common/services/bcrypt/bcrypt.service';
 import { JwtService } from '@nestjs/jwt';
 import { Response } from './dto/response';
 import { HttpError } from 'src/common/interfaces/error.interface';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class AuthService {
   constructor(
-    @Inject('USER_REPOSITORY')
+    @InjectRepository(User)
     private userRpt: Repository<User>,
     private _bcryptSrv: BcryptService,
     private _jwtSrv: JwtService,
@@ -94,7 +94,7 @@ export class AuthService {
     }
   }
 
-  async findOneById(id: number): Promise<User | null | false> {
+  async findOneById(id: number): Promise<User | null> {
     try {
       this.logger.log('looking for user...');
       const findUser: User | null = await this.userRpt.findOne({
