@@ -34,7 +34,7 @@ type Query {
 type Mutation {
   createOneBook(createBook: CreateBookInput!): Book!
   createReview(createReview: CreateReviewInput!): Review!
-  createSaveralBooks: Book!
+  createSaveralBooks(quantity: Float!): [Book!]!
 }
 
 input CreateBookInput {
