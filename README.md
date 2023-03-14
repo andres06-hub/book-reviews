@@ -6,7 +6,18 @@ Technical test (fullStack) of [ControlBox.it](https://my.controlbox.net/) and [L
 
 ## Prerequisite
 
+Have the following installed
+
+| Dependecia | Link                                               | version  |
+| -----------|----------------------------------------------------|----------|
+| Docker     | [docs.docker](https://docs.docker.com/get-docker/) |  23.0.1  |
+| NodeJs     | [nodejs](https://nodejs.org/)                      |  18.14.2 |
+| Angular    | [angular](https://angular.io/)                     |  15.2.1  |
+| NestJs     | [docs.nestjs](https://docs.nestjs.com)             |  9.2.0   |
+
+
 - In order to build the project, Docker compose must be raised
+  `docker-compose up --build`
 - Or build the server first and then the Frontend.
 
 ## Backend
