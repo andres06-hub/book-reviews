@@ -28,13 +28,13 @@ type User {
 
 type Query {
   book: [Book!]!
+  reviewsOneUser(id: Int!): [Review!]!
 }
 
 type Mutation {
-  createBook(createBook: CreateBookInput!): Book!
+  createOneBook(createBook: CreateBookInput!): Book!
   createReview(createReview: CreateReviewInput!): Review!
-  updateBook(updateBook: UpdateBookInput!): Book!
-  removeBook(id: Int!): Book!
+  createSaveralBooks: Book!
 }
 
 input CreateBookInput {
@@ -42,20 +42,10 @@ input CreateBookInput {
   linkImg: String!
   author: String!
   description: String!
-  reviews: [String!]!
 }
 
 input CreateReviewInput {
   comment: String!
   userId: Float!
   bookId: Float!
-}
-
-input UpdateBookInput {
-  title: String
-  linkImg: String
-  author: String
-  description: String
-  reviews: [String!]
-  id: Int!
 }
