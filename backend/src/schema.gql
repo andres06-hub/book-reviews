@@ -14,6 +14,7 @@ type Book {
 type Review {
   id: String!
   comment: String!
+  rating: Int!
   user: User!
   book: Book!
 }
@@ -46,6 +47,7 @@ input CreateBookInput {
 
 input CreateReviewInput {
   comment: String!
+  rating: Float!
   userId: Float!
   bookId: Float!
 }
