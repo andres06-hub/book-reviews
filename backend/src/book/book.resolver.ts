@@ -19,6 +19,11 @@ export class BookResolver {
     return await this.bookService.createReview(data);
   }
 
+  @Mutation(() => [Book])
+  async createSaveralBooks(@Args('quantity') data: number) {
+    return await this.bookService.createSeveralBooks(data);
+  }
+
   @Query(() => [Book], { name: 'book' })
   async findAllBook(): Promise<Book[]> {
     return await this.bookService.findAllBook();
