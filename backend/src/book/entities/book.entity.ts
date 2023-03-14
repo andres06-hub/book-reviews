@@ -25,7 +25,7 @@ export class Book {
   @Field()
   description: string;
 
-  @OneToMany(() => Review, (review) => review.book, {})
+  @OneToMany(() => Review, (review) => review.book, { nullable: true })
   @Field(() => [Review], { nullable: true })
   reviews: Review[];
 }

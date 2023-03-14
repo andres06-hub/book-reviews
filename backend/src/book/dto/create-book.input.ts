@@ -15,9 +15,4 @@ export class CreateBookInput {
   @IsNotEmpty({ message: 'Required field' })
   @Field()
   description: string;
-  // @Field(() => [Review])
-  // reviews?: Review[];
-  @IsString()
-  @Field(() => [String])
-  reviews?: string[];
 }

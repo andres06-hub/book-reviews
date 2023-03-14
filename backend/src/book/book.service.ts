@@ -31,9 +31,15 @@ export class BookService {
   private logger = new Logger();
 
   //TODO: create book
-  async createBook(data: CreateBookInput) {
+  async createBook(data: CreateBookInput): Promise<Book> {
     console.table(data);
-    this.bookRpt.create();
+    const newBook: Book = this.bookRpt.create({
+      title: data.title,
+      description: data.description,
+      author: data.author,
+      linkImg: data.linkImg,
+    });
+    return await this.bookRpt.save(newBook);
   }
 
   async createReview(data: CreateReviewInput): Promise<Review | ResponseBook> {
@@ -45,12 +51,6 @@ export class BookService {
     const bookFind: Book | null = await this.findOneBookById(data.bookId);
     if (!bookFind)
       throw new NotFoundException(new ResponseBook(false, 'Book not found!'));
-    //Create Review
-    // const dataReview: Review = {
-    //   comment: data.comment,
-    //   user: userFind,
-    //   book: bookFind,
-    // };
     const newReview: Review = this.reviewRpt.create({
       comment: data.comment,
       user: userFind,
@@ -59,8 +59,17 @@ export class BookService {
     return await this.reviewRpt.save(newReview);
   }
 
-  findAll() {
-    return `This action returns all book`;
+  async findAllBook(): Promise<Book[]> {
+    return this.bookRpt.find();
+  }
+
+  async findAllReviewsOneUser(id: number): Promise<Review[] | null> {
+    const userFind: User | null = await this._authSrv.findOneById(id);
+    if (!userFind)
+      throw new NotFoundException(new ResponseBook(false, 'User not found'));
+    return await this.reviewRpt.find({
+      where: { user: userFind },
+    });
   }
 
   async findOneBookById(id: number): Promise<Book | null> {
