@@ -1,5 +1,13 @@
 import { User } from 'src/models/user.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  Timestamp,
+  UpdateDateColumn,
+} from 'typeorm';
 import { Book } from './book.entity';
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 
@@ -29,4 +37,16 @@ export class Review {
   @ManyToOne(() => Book, (book) => book.reviews)
   @Field(() => Book)
   book: Book;
+
+  @CreateDateColumn({
+    type: 'timestamp',
+  })
+  @Field(() => Int)
+  createdAt: Date;
+
+  @UpdateDateColumn({
+    type: 'timestamp',
+  })
+  @Field()
+  updateAt: Date;
 }

@@ -94,9 +94,11 @@ export class BookService {
     const userFind: User | null = await this._authSrv.findOneById(id);
     if (!userFind)
       throw new NotFoundException(new ResponseBook(false, 'User not found'));
-    return await this.reviewRpt.find({
+    const reviews: Review[] = await this.reviewRpt.find({
       where: { user: userFind },
     });
+    console.log(reviews);
+    return reviews;
   }
 
   async findOneBookById(id: number): Promise<Book | null> {
