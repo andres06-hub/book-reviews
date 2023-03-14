@@ -1,0 +1,15 @@
+version: '3'
+volumes:
+    db-booksR:
+
+services:
+  booksReviews:
+    image: mysql:8
+    container_name: booksReviews
+    environment:
+        - MYSQL_DATABASE=booksR
+        - MYSQL_ROOT_PASSWORD=12345
+    ports:
+        - "3306:3306"
+    volumes: 
+      - db-booksR:/var/lib/mysql
