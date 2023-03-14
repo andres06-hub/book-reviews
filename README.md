@@ -8,13 +8,12 @@ Technical test (fullStack) of [ControlBox.it](https://my.controlbox.net/) and [L
 
 Have the following installed
 
-| Dependecia | Link                                               | version  |
-| -----------|----------------------------------------------------|----------|
-| Docker     | [docs.docker](https://docs.docker.com/get-docker/) |  23.0.1  |
-| NodeJs     | [nodejs](https://nodejs.org/)                      |  18.14.2 |
-| Angular    | [angular](https://angular.io/)                     |  15.2.1  |
-| NestJs     | [docs.nestjs](https://docs.nestjs.com)             |  9.2.0   |
-
+| Dependecia | Link                                               | version |
+| ---------- | -------------------------------------------------- | ------- |
+| Docker     | [docs.docker](https://docs.docker.com/get-docker/) | 23.0.1  |
+| NodeJs     | [nodejs](https://nodejs.org/)                      | 18.14.2 |
+| Angular    | [angular](https://angular.io/)                     | 15.2.2  |
+| NestJs     | [docs.nestjs](https://docs.nestjs.com)             | 9.2.0   |
 
 - In order to build the project, Docker compose must be raised
   `docker-compose up --build`
@@ -29,7 +28,7 @@ You must create a file in the root (/) called app.env and add to it the followin
 | DB_NAME     | booksR     |
 | DB_USER     | root       |
 | DB_PWD      | 12345      |
-| DB_PORT     | 5432       |
+| DB_PORT     | 3306       |
 | DB_HOST     | localhost  |
 | JWT_KEY     | <your_key> |
 | JWT_EXPIRES | '1h'       |
