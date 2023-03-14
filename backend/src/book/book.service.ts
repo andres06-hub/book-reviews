@@ -17,6 +17,8 @@ import { AuthService } from 'src/auth/auth.service';
 import { User } from 'src/models/user.entity';
 import { ResponseBook } from './dto/responseBook';
 import { HttpError } from 'src/common/interfaces/error.interface';
+import { faker } from '@faker-js/faker';
+import { BookInterface } from './interfaces/book.interface';
 
 @Injectable()
 export class BookService {
@@ -30,7 +32,6 @@ export class BookService {
   ) {}
   private logger = new Logger();
 
-  //TODO: create book
   async createBook(data: CreateBookInput): Promise<Book> {
     console.table(data);
     const newBook: Book = this.bookRpt.create({
@@ -57,6 +58,32 @@ export class BookService {
       book: bookFind,
     });
     return await this.reviewRpt.save(newReview);
+  }
+
+  async createSeveralBooks(quantity: number): Promise<BookInterface[]> {
+    const books: BookInterface[] = [];
+    this.logger.log('Creating Books...');
+    for (let i = 0; i < quantity; i++) {
+      books.push(
+        new Book(
+          faker.datatype.number(),
+          faker.lorem.words(20),
+          faker.name.fullName(),
+          faker.company.name(),
+          faker.image.imageUrl(),
+        ),
+      );
+    }
+    this.logger.log('Created Books Successfully!');
+    try {
+      await this.bookRpt.save(books);
+    } catch (e) {
+      const error: HttpError = e.driverError.detail as HttpError;
+      this.logger.error(error);
+      throw new BadRequestException(error);
+    }
+    this.logger.log('SAVE Books Successfully!');
+    return books;
   }
 
   async findAllBook(): Promise<Book[]> {
@@ -88,6 +115,8 @@ export class BookService {
     }
   }
 
+  //API v2
+  /*
   update(id: number, updateBookInput: UpdateBookInput) {
     return `This action updates a #${id} book`;
   }
@@ -95,4 +124,5 @@ export class BookService {
   remove(id: number) {
     return `This action removes a #${id} book`;
   }
+  */
 }
