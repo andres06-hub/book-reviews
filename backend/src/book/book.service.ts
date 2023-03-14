@@ -7,7 +7,6 @@ import {
   forwardRef,
 } from '@nestjs/common';
 import { CreateBookInput } from './dto/create-book.input';
-import { UpdateBookInput } from './dto/update-book.input';
 import { Repository } from 'typeorm';
 import { Book } from './entities/book.entity';
 import { Review } from './entities/review.entity';
@@ -54,6 +53,7 @@ export class BookService {
       throw new NotFoundException(new ResponseBook(false, 'Book not found!'));
     const newReview: Review = this.reviewRpt.create({
       comment: data.comment,
+      rating: data.rating,
       user: userFind,
       book: bookFind,
     });

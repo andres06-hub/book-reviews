@@ -1,7 +1,7 @@
 import { User } from 'src/models/user.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Book } from './book.entity';
-import { ObjectType, Field } from '@nestjs/graphql';
+import { ObjectType, Field, Int } from '@nestjs/graphql';
 
 @Entity({ name: 'review' })
 @ObjectType()
@@ -15,6 +15,12 @@ export class Review {
   @Column()
   @Field()
   comment: string;
+
+  @Column({
+    default: 1,
+  })
+  @Field(() => Int)
+  rating: number;
 
   @ManyToOne(() => User, (user) => user.reviews)
   @Field(() => User)
