@@ -1,9 +1,20 @@
-import { Inject, Injectable, Logger } from '@nestjs/common';
+import {
+  BadRequestException,
+  ForbiddenException,
+  HttpException,
+  Inject,
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+  NotFoundException,
+} from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { User } from 'src/models/user.entity';
 import { DataSignUp } from './dto/signUp.dto';
 import { BcryptService } from 'src/common/services/bcrypt/bcrypt.service';
 import { JwtService } from '@nestjs/jwt';
+import { Response } from './dto/response';
+import { HttpError } from 'src/common/interfaces/error.interface';
 
 @Injectable()
 export class AuthService {
@@ -16,17 +27,20 @@ export class AuthService {
   private logger = new Logger();
 
   // eslint-disable-next-line prettier/prettier
-  async login(email: string, password: string): Promise<string | boolean | null> {
+  async login(email: string, password: string): Promise<Response> {
     const findUser: User | null | false = await this.findOneByMail(email);
-    if (findUser === null) return null; // NOt found
-    if (findUser === false) return false; //Error
+    if (findUser === null || findUser === false)
+      throw new NotFoundException(new Response(false, 'Not Found!')); // NOt found
     this.logger.log('User Exists!');
     //Validate pass
     const pwd: boolean = await this._bcryptSrv.unencrypt(
       findUser.password,
       password,
     );
-    if (!pwd) return 'incorrect';
+    if (!pwd)
+      throw new ForbiddenException(
+        new Response(false, 'Incorrect credentials'),
+      );
     console.log(pwd);
     //Create JWT
     const payload = {
@@ -35,10 +49,23 @@ export class AuthService {
     };
     const token = this._jwtSrv.sign(payload);
     //Return JWT
-    return token;
+    return new Response(true, 'Login Sucessfully', { token });
   }
 
-  async signUp(data: DataSignUp): Promise<User | boolean> {
+  async signUp(data: DataSignUp): Promise<Response> {
+    const found: User | boolean | null = await this.findOneByMail(data.email);
+    if (found) {
+      this.logger.warn('The user exists!');
+      return new Response(false, 'user exists!');
+    }
+    if (found === false)
+      throw new InternalServerErrorException(
+        'ERROR: When searching for the user',
+      );
+    return this.createUser(data);
+  }
+
+  async createUser(data: DataSignUp): Promise<Response> {
     const { password } = data;
     //bcrypt psw
     const pwdToHash: string = await this._bcryptSrv.bcryptToHash(password);
@@ -48,10 +75,9 @@ export class AuthService {
     const newUser: User = this.userRpt.create(data);
     this.userRpt.save(newUser);
     this.logger.log(newUser);
-    return newUser;
+    return new Response(true, 'User created successfully', { newUser });
   }
 
-  //DB
   async findOneByMail(email: string): Promise<User | null | false> {
     try {
       this.logger.log('looking for user...');
@@ -61,9 +87,10 @@ export class AuthService {
         },
       });
       return findUser;
-    } catch (error) {
+    } catch (e) {
+      const error: HttpError = e.driverError.detail as HttpError;
       this.logger.error(error);
-      return false;
+      throw new BadRequestException(error);
     }
   }
 
@@ -76,9 +103,10 @@ export class AuthService {
         },
       });
       return findUser;
-    } catch (error) {
+    } catch (e) {
+      const error: HttpError = e.driverError.detail as HttpError;
       this.logger.error(error);
-      return false;
+      throw new BadRequestException(error);
     }
   }
 }
