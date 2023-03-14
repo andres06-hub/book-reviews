@@ -1,6 +1,4 @@
 import { DataSource } from 'typeorm';
-import * as path from 'path';
-import * as appRootPath from 'app-root-path';
 import { config } from 'dotenv';
 import { User } from 'src/models/user.entity';
 import { Logger } from '@nestjs/common';
