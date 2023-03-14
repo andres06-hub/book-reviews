@@ -1,6 +1,6 @@
 # BooksReviews API
 This is a project where there are books and users leave their reviews.
 
-Technical test (fullStack) of [ControlBox.it](https://my.controlbox.net/)
+Technical test (fullStack) of [ControlBox.it](https://my.controlbox.net/) and [Letsbos.it](https://letsbox.it/#/Main)
 
 
