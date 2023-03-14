@@ -1,6 +1,5 @@
 import { InputType, Field } from '@nestjs/graphql';
-import { Review } from '../entities/review.entity';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty } from 'class-validator';
 
 @InputType()
 export class CreateBookInput {
