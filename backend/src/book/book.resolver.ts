@@ -52,6 +52,12 @@ export class BookResolver {
     return await this.bookService.findOneUser(id);
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Query(() => [Review], { name: 'getReviewsByBookId' })
+  getReviewsById(@Args('bookId', { type: () => Int }) bookId: number) {
+    return this.bookService.findAllReviewsByBookId(bookId);
+  }
+
   //API-V2
   /*
   @Mutation(() => Book)

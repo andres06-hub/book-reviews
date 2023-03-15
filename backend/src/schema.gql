@@ -38,6 +38,7 @@ type Query {
   book: [Book!]!
   reviewsOneUser(id: Int!): [Review!]!
   user(id: Int!): User!
+  getReviewsByBookId(bookId: Int!): [Review!]!
 }
 
 type Mutation {

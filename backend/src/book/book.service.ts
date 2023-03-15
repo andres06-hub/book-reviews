@@ -108,15 +108,25 @@ export class BookService {
     return reviews;
   }
 
+  async findAllReviewsByBookId(bookId: number) {
+    const book: Book | null = await this.findOneBookById(bookId);
+    if (!book)
+      throw new NotFoundException(new ResponseBook(false, 'Book Not Exist!'));
+    const findReviews: Review[] = await this.reviewRpt.find({
+      where: { book },
+    });
+    return findReviews;
+  }
+
   async findOneBookById(id: number): Promise<Book | null> {
     try {
       this.logger.log('looking for book...');
-      const findUser: Book | null = await this.bookRpt.findOne({
+      const findBook: Book | null = await this.bookRpt.findOne({
         where: {
           id: id,
         },
       });
-      return findUser;
+      return findBook;
     } catch (e) {
       const error: HttpError = e.driverError.detail as HttpError;
       this.logger.error(error);
