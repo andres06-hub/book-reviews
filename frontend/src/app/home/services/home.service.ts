@@ -11,12 +11,8 @@ export class HomeService {
   constructor(private _http: HttpClient, private _apollo: Apollo) {}
 
   getBooks() {
-    // const token: string | null = window.sessionStorage.getItem('token');
-    // if (!token) return;
-    // const headers: HttpHeaders = new HttpHeaders({ 'Authorization': token})
-    return this._apollo
-      .watchQuery<any>({
-        query: GET_BOOKS,
-      });
+    return this._apollo.watchQuery<any>({
+      query: GET_BOOKS,
+    });
   }
 }

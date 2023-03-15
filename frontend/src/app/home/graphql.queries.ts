@@ -1,12 +1,34 @@
 import { gql } from 'apollo-angular';
 export const GET_BOOKS = gql`
   query {
-    book{
+    book {
       id
       title
       linkImg
       author
       description
+    }
+  }
+`;
+
+export const CREATE_REVIEW = gql`
+  mutation createReview(
+    $comment: String!
+    $rating: Int!
+    $userId: Int!
+    $bookId: Int!
+  ) {
+    createReview(
+      createReview: {
+        comment: $comment
+        rating: $rating
+        userId: $userId
+        bookId: $bookId
+      }
+    ) {
+      id
+      comment
+      rating
     }
   }
 `;
