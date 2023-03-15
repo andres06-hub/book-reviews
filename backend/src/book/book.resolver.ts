@@ -6,6 +6,8 @@ import { CreateBookInput } from './dto/create-book.input';
 import { Review } from './entities/review.entity';
 import { CreateReviewInput } from './dto/create-review.input';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { User } from 'src/models/user.entity';
+import { ResponseBook } from './dto/responseBook';
 
 @Resolver(() => [Book, Review])
 export class BookResolver {
@@ -40,6 +42,12 @@ export class BookResolver {
     @Args('id', { type: () => Int }) id: number,
   ): Promise<Review[]> {
     return await this.bookService.findAllReviewsOneUser(id);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Query(() => User, { name: 'user' })
+  async getUser(@Args('id') id: number): Promise<ResponseBook> {
+    return await this.bookService.findOneUser(id);
   }
 
   //API-V2

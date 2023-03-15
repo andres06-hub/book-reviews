@@ -8,3 +8,10 @@ export interface BookInterface {
   author: string;
   reviews?: Review[];
 }
+
+export interface UserDatainterface {
+  id: number;
+  username: string;
+  email: string;
+  reviews: Review[] | [];
+}

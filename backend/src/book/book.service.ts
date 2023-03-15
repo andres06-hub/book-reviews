@@ -18,6 +18,7 @@ import { ResponseBook } from './dto/responseBook';
 import { HttpError } from 'src/common/interfaces/error.interface';
 import { faker } from '@faker-js/faker';
 import { BookInterface } from './interfaces/book.interface';
+import { DataUser } from './dto/data-user.dto';
 
 @Injectable()
 export class BookService {
@@ -103,7 +104,7 @@ export class BookService {
     const reviews: Review[] = await this.reviewRpt.find({
       where: { user: userFind },
     });
-    console.log(reviews);
+    this.logger.log('Reviews Obtained');
     return reviews;
   }
 
@@ -121,6 +122,21 @@ export class BookService {
       this.logger.error(error);
       throw new BadRequestException(error);
     }
+  }
+
+  async findOneUser(idInput: number): Promise<ResponseBook> {
+    const reviews: Review[] | null = await this.findAllReviewsOneUser(idInput);
+    this.logger.log('Reviews data Obtained');
+    const user: User | null = await this._authSrv.findOneById(idInput);
+    if (!user)
+      throw new NotFoundException(new ResponseBook(false, 'User Not Found'));
+    this.logger.log('User data Obtained');
+    const { id, username, email } = user;
+    const reviewData = reviews ? reviews : [];
+    const dataUser = new DataUser(id, username, email, reviewData);
+    console.log(dataUser);
+    //TODO: solve the answers to the reviews
+    return new ResponseBook(true, 'Data User', dataUser);
   }
 
   //API v2
