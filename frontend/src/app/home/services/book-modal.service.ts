@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Book, CreateReview } from '../interfaces/book.interface';
 import { Apollo } from 'apollo-angular';
-import { CREATE_REVIEW } from '../graphql.queries';
+import { CREATE_REVIEW } from '../../common/graphql.queries';
 
 export interface BookModalPayload {
   state: string;

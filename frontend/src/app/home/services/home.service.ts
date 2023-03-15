@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Apollo } from 'apollo-angular';
-import { GET_BOOKS } from '../graphql.queries';
+import { GET_BOOKS } from '../../common/graphql.queries';
 import { ResponseBook } from '../interfaces/book.interface';
 
 @Injectable({

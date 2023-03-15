@@ -1,3 +1,5 @@
+import { Review } from 'src/app/common/data.interface';
+
 export interface Book {
   id: number;
   title: string;
@@ -5,13 +7,6 @@ export interface Book {
   linkImg: string;
   author: string;
   reviews?: Review[];
-}
-
-export interface Review {
-  id: string;
-  comment: string;
-  rating: number;
-  createAt: string;
 }
 
 export interface ResponseBook {
