@@ -46,7 +46,9 @@ export class BookResolver {
 
   @UseGuards(JwtAuthGuard)
   @Query(() => User, { name: 'user' })
-  async getUser(@Args('id') id: number): Promise<ResponseBook> {
+  async getUser(
+    @Args('id', { type: () => Int }) id: number,
+  ): Promise<ResponseBook | User> {
     return await this.bookService.findOneUser(id);
   }
 

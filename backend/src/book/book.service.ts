@@ -124,19 +124,12 @@ export class BookService {
     }
   }
 
-  async findOneUser(idInput: number): Promise<ResponseBook> {
-    const reviews: Review[] | null = await this.findAllReviewsOneUser(idInput);
-    this.logger.log('Reviews data Obtained');
+  async findOneUser(idInput: number): Promise<User> {
     const user: User | null = await this._authSrv.findOneById(idInput);
     if (!user)
       throw new NotFoundException(new ResponseBook(false, 'User Not Found'));
     this.logger.log('User data Obtained');
-    const { id, username, email } = user;
-    const reviewData = reviews ? reviews : [];
-    const dataUser = new DataUser(id, username, email, reviewData);
-    console.log(dataUser);
-    //TODO: solve the answers to the reviews
-    return new ResponseBook(true, 'Data User', dataUser);
+    return user;
   }
 
   //API v2
