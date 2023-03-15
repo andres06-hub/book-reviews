@@ -87,7 +87,10 @@ export class BookService {
   }
 
   async findAllBook(): Promise<Book[]> {
-    return this.bookRpt.find();
+    this.logger.log('Geting Books...');
+    const books: Book[] = await this.bookRpt.find();
+    this.logger.log('Books obtained.');
+    return books;
   }
 
   async findAllReviewsOneUser(id: number): Promise<Review[] | null> {

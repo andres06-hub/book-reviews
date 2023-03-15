@@ -74,7 +74,7 @@ export class AuthService {
     const newUser: User = this.userRpt.create(data);
     this.userRpt.save(newUser);
     this.logger.log(newUser);
-    return new Response(true, 'User created successfully', { newUser });
+    return new Response(true, 'User created successfully', newUser);
   }
 
   async findOneByMail(email: string): Promise<User | null | false> {
