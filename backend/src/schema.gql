@@ -37,6 +37,7 @@ type User {
 type Query {
   book: [Book!]!
   reviewsOneUser(id: Int!): [Review!]!
+  user(id: Float!): User!
 }
 
 type Mutation {
