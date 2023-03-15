@@ -1,4 +1,4 @@
-import { InputType, Field } from '@nestjs/graphql';
+import { InputType, Field, Int } from '@nestjs/graphql';
 import { IsNotEmpty, MaxLength, MinLength } from 'class-validator';
 
 @InputType()
@@ -15,14 +15,14 @@ export class CreateReviewInput {
   @MaxLength(5, {
     message: 'Rating incorrect, 1-5',
   })
-  @Field()
+  @Field(() => Int)
   rating: number;
 
   @IsNotEmpty()
-  @Field()
+  @Field(() => Int)
   userId: number;
 
   @IsNotEmpty()
-  @Field()
+  @Field(() => Int)
   bookId: number;
 }

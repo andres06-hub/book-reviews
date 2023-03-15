@@ -54,7 +54,7 @@ input CreateBookInput {
 
 input CreateReviewInput {
   comment: String!
-  rating: Float!
-  userId: Float!
-  bookId: Float!
+  rating: Int!
+  userId: Int!
+  bookId: Int!
 }

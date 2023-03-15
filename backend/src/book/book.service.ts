@@ -57,7 +57,10 @@ export class BookService {
       user: userFind,
       book: bookFind,
     });
-    return await this.reviewRpt.save(newReview);
+    this.logger.log('Created Review.');
+    const review: Review = await this.reviewRpt.save(newReview);
+    this.logger.log('Saved Review. ', review);
+    return review;
   }
 
   async createSeveralBooks(quantity: number): Promise<BookInterface[]> {
