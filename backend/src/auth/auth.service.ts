@@ -48,7 +48,7 @@ export class AuthService {
     };
     const token = this._jwtSrv.sign(payload);
     //Return JWT
-    return new Response(true, 'Login Sucessfully', { token });
+    return new Response(true, 'Login Sucessfully', { token, id: findUser.id });
   }
 
   async signUp(data: DataSignUp): Promise<Response> {
