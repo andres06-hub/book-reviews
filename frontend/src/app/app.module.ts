@@ -8,6 +8,7 @@ import { SharedModule } from './shared/shared.module';
 import { GraphQLModule } from './graphql.module';
 import { CoreModule } from './core/core.module';
 import { OrDefaultPipe } from './core/pipes/or-default.pipe';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +18,7 @@ import { OrDefaultPipe } from './core/pipes/or-default.pipe';
     HttpClientModule,
     SharedModule,
     GraphQLModule,
+    RouterModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
