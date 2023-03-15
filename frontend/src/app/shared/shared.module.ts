@@ -9,6 +9,7 @@ import { NavComponent } from './nav/nav.component';
 import { CardComponent } from './card/card.component';
 import { RouterModule } from '@angular/router';
 import { ModalCreateReviewComponent } from './modal-create-review/modal-create-review.component';
+import { ReviewComponent } from './review/review.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ModalCreateReviewComponent } from './modal-create-review/modal-create-r
     NavComponent,
     CardComponent,
     ModalCreateReviewComponent,
+    ReviewComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule, CoreModule, RouterModule],
   exports: [
@@ -26,6 +28,7 @@ import { ModalCreateReviewComponent } from './modal-create-review/modal-create-r
     BookModalComponent,
     NavComponent,
     CardComponent,
+    ReviewComponent,
   ],
 })
 export class SharedModule {}
