@@ -25,6 +25,7 @@ export class LoginService {
           if (!status) return; // Not login
           if (data) {
             window.sessionStorage.setItem('token', data.token);
+            window.sessionStorage.setItem('id', data.id.toString());
             this.route.navigate(['/home']);
           }
         },

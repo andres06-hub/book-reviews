@@ -11,4 +11,5 @@ export interface ResponseAuth {
 
 export interface DataToken {
   token: string;
+  id: number;
 }
