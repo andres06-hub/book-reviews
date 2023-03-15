@@ -43,6 +43,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnDestroy {
 
   writeValue(val: any): void {
     this.value = val;
+    this.inputControl.setValue(val);
   }
 
   registerOnChange(fn: (val: any) => void): void {
