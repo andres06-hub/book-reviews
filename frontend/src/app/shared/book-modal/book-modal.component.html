@@ -1,0 +1,19 @@
+<section class="modal-container">
+  <div class="backdrop"></div>
+  <article class="book-info">
+    <section>
+      <h2>{{ (book$ | async)?.title | orDefault }}</h2>
+      <img src="" alt="">
+      <p>Description</p>
+      <p>Author</p>
+      <p>id</p>
+    </section>
+    <section>
+      <p>Reviews</p>
+    </section>
+    <footer>
+      <app-button label="Close" (btnClick)="onModalClose()"></app-button>
+    </footer>
+  </article>
+  <p>book-modal works!</p>
+</section>
