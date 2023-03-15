@@ -1,6 +1,6 @@
 <h1>Login</h1>
 <form [formGroup]="loginForm">
-  <app-input label="E-Mail" formControlName="email"></app-input>
-  <app-input label="Password" formControlName="password"></app-input>
+  <app-input label="E-Mail" formControlName="email" type="email" placeholder="Insert your e-mail address"></app-input>
+  <app-input label="Password" formControlName="password" type="password" placeholder="Insert your password"></app-input>
   <app-button label="Log in" (btnClick)="onSubmit()"></app-button>
 </form>

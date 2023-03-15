@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { LoginService } from './service/login.service';
 
 @Component({
   selector: 'app-login',
@@ -8,18 +9,25 @@ import { FormBuilder, FormControl } from '@angular/forms';
 })
 export class LoginComponent {
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private loginSrv: LoginService,
+    ) {}
 
   public loginForm = this.fb.group({
-    email: [],
-    password: []
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.min(6), Validators.max(25)]]
   });
 
   public onSubmit() {
     console.warn(this.loginForm.value);
+    console.warn(this.loginForm.errors);
+    const { email, password } = this.loginForm.value;
+    if (!email || !password) return;
+    this.performLogin(email, password);
   }
 
   public performLogin(email: string, password: string) {
-
+    this.loginSrv.login({ email, password });
   }
 }
