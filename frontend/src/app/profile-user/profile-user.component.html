@@ -1,0 +1,10 @@
+<p>profile-user works!</p>
+<section>
+  <div class="datauser-container">
+    <h2>{{ username }}</h2>
+    <p>{{ email }}</p>
+  </div>
+  <section class="reviews-container">
+    <app-review *ngFor="let review of reviews" [review]="review"></app-review>
+  </section>
+</section>
