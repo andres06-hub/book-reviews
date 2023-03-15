@@ -1,7 +1,7 @@
 <h1>Signup</h1>
 <form [formGroup]="signupForm">
-  <app-input label="Username" formControlName="username"></app-input>
-  <app-input label="E-Mail" formControlName="emial" type="emial" placeholder="example@example.com"></app-input>
+  <app-input label="Username" formControlName="username" placeholder="Insert your username"></app-input>
+  <app-input label="E-Mail" formControlName="email" type="emial" placeholder="example@example.com"></app-input>
   <app-input label="Password" formControlName="password" type="password" placeholder="Insert your password"></app-input>
   <app-button label="Sign Up" (btnClick)="onSubmit()"></app-button>
 </form>

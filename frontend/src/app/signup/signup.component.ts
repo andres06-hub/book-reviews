@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
+import { SignupService } from './services/signup.service';
 
 @Component({
   selector: 'app-signup',
@@ -8,15 +9,24 @@ import { FormBuilder, FormControl } from '@angular/forms';
 })
 export class SignupComponent {
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private signupSrv: SignupService,
+    ) {}
 
   public signupForm = this.fb.group({
     username: [],
-    emial: [],
+    email: [],
     password: [],
   })
 
   public onSubmit() {
-    console.warn(this.signupForm.value);
+    const { username, email, password } = this.signupForm.value;
+    if (!username || !email || !password) return;
+    this.performSignUp(username, email, password);
+  }
+
+  public performSignUp(username: string, email: string, password: string) {
+    this.signupSrv.register({ username, email, password })
   }
 }
