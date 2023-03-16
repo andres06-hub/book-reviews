@@ -2,7 +2,10 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Book, CreateReview } from '../interfaces/book.interface';
 import { Apollo } from 'apollo-angular';
-import { CREATE_REVIEW } from '../../common/graphql.queries';
+import {
+  CREATE_REVIEW,
+  GET_REVIEWS_BY_BOOKID,
+} from '../../common/graphql.queries';
 
 export interface BookModalPayload {
   state: string;
@@ -28,6 +31,15 @@ export class BookModalService {
   close() {
     this.signal.next({
       state: 'close',
+    });
+  }
+
+  getReviews(bookId: number) {
+    return this._apollo.watchQuery<any>({
+      query: GET_REVIEWS_BY_BOOKID,
+      variables: {
+        bookId: bookId,
+      },
     });
   }
 
