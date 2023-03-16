@@ -1,0 +1,16 @@
+.review-cont{
+  border: 1px solid gray;
+  border-radius: 10px;
+  width: 20rem;
+  height: 5rem;
+  font-size: 15px;
+  padding: 1rem;
+  .p-id{
+    color: gray;
+    font-size: 13px;
+  }
+}
+
+.review-cont:hover{
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}

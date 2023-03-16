@@ -30,7 +30,7 @@ export class ProfileUserComponent implements OnInit {
       next: (res) => {
         const { id, username, email } = res.data.user;
         this.id = id;
-        this.username = username;
+        this.username = username.toUpperCase();
         this.email = email;
       },
       error: (res) => {
