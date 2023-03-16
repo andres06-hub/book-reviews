@@ -1,12 +1,16 @@
-<p>book-card works!</p>
-<div>
-  <h3>{{ book.title }}</h3>
-  <p>{{ book.linkImg }}</p>
-  <img src="{{ book.linkImg }}" alt="imgBook">
-  <p>{{ book.description }}</p>
-  <p>{{ book.author }}</p>
-  <span>{{ book.id }}</span>
-  <div>
+<div class="card-container">
+  <div class="img-container">
+    <img src="{{ book.linkImg }}" alt="imgBook">
+  </div>
+  <div class="title-cont">
+    <h3>{{ book.title }}</h3>
+    <span>{{ book.id }}</span>
+  </div>
+  <div class="descrip-cont">
+    <!-- <p class="descrip">{{ book.description }}</p> -->
+    <p>By {{ book.author }}</p>
+  </div>
+  <div class="btn-cont">
     <app-button label="See More" (btnClick)="onSeeMore()"></app-button>
   </div>
 </div>

@@ -1,0 +1,15 @@
+.home-cont{
+  width: 100%;
+  height: auto;
+  padding: 0 2rem;
+  position: relative;
+  top: -7.25em;
+  // border: 1px solid red;
+  .books-cont{
+    width: 100%;
+    gap: .5rem;
+    display: flex;
+    flex-wrap: wrap;
+    place-content: center;
+  }
+}
