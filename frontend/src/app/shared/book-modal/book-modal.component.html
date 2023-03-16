@@ -11,8 +11,9 @@
       <p>Author</p>
       <p>id</p>
     </section>
-    <section>
-      <p>Reviews</p>
+    <section class="reviews-container">
+      <h3>Reviews</h3>
+      <app-review *ngFor="let review of reviews" [review]="review"></app-review>
     </section>
     <section *ngIf="visibleForm">
       <form [formGroup]="createReviewForm">

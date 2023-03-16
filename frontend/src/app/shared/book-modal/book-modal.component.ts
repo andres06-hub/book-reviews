@@ -2,6 +2,7 @@ import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { BookModalService } from '../../home/services/book-modal.service';
 import { Observable, Subject, async } from 'rxjs';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Review } from 'src/app/common/data.interface';
 
 @Component({
   selector: 'app-book-modal',
@@ -21,12 +22,33 @@ export class BookModalComponent implements OnInit {
 
   public book$: Observable<any> = this.bookSignal.asObservable();
 
+  public reviews: Review[] = [
+    {
+      id: 'example',
+      comment: 'example',
+      rating: 1,
+      createAt: 'example',
+    },
+  ];
+
   ngOnInit(): void {
     this.bookModalSrv.modalState$.subscribe({
       next: ({ state, payload }) => {
         console.log(state);
         this.visible = state != 'close';
         this.bookSignal.next(payload);
+      },
+    });
+
+    //TODO: Obtener id de cada libro y hacer peticon para los review
+    console.warn(this.book$.source);
+    //Get Book Id
+    this.bookModalSrv.getReviews(1).valueChanges.subscribe({
+      next: (res) => {
+        console.log(res.data.getReviewsByBookId);
+      },
+      error: (rej) => {
+        console.error(rej);
       },
     });
   }
