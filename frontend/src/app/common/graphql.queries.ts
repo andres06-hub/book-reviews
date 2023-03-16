@@ -52,3 +52,13 @@ export const GET_REVIEW_ONE_USER = gql`
     }
   }
 `;
+
+export const GET_REVIEWS_BY_BOOKID = gql`
+  query getReviewsByBookId($bookId: Int!) {
+    getReviewsByBookId(bookId: $bookId) {
+      id
+      comment
+      rating
+    }
+  }
+`;
