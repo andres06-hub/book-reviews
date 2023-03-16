@@ -4,6 +4,17 @@ This is a project where there are books and users leave their reviews.
 
 Technical test (fullStack) of [ControlBox.it](https://my.controlbox.net/) and [Letsbos.it](https://letsbox.it/#/Main)
 
+- Clone repository
+
+```bash
+#SSH
+git clone --depth 1 git@github.com:andres06-hub/book-reviews.git
+git clone git@github.com:andres06-hub/book-reviews.git
+#HTTPS
+git clone --depth 1 https://github.com/andres06-hub/book-reviews.git
+git clone https://github.com/andres06-hub/book-reviews.git
+```
+
 ## Prerequisite
 
 Have the following installed
@@ -19,7 +30,27 @@ Have the following installed
   `docker-compose up --build`
 - Or build the server first and then the Frontend.
 
+## Important
+
+- Installed or activated pnpm : [See more](https://pnpm.io/)
+
+```bash
+# activated
+corepack enable
+
+#Installed
+npm install -g pnpm
+```
+
+- then run: to install the dependencies
+
+```bash
+pnpm i
+```
+
 ## Backend
+
+- Install dependencies with `pnpm i`
 
 You must create a file in the root (/) called app.env and add to it the following environment variables.
 
@@ -34,3 +65,5 @@ You must create a file in the root (/) called app.env and add to it the followin
 | JWT_EXPIRES | '1h'       |
 
 ## Frontend
+
+- Install dependencies with `pnpm i`
